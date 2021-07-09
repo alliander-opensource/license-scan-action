@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2021 Alliander N.V.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 name: 'OSPO License scan action'
 description: 'A GitHub Action created by the Alliander Open Source Program Office (OSPO) to scan for licenses in your code.'
 runs:
