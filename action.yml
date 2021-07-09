@@ -1,0 +1,12 @@
+name: 'OSPO License scan action'
+description: 'A GitHub Action created by the Alliander Open Source Program Office (OSPO) to scan for licenses in your code.'
+runs:
+  using: "composite"
+  steps:
+    - name: Analyze
+      run: |
+        set -o xtrace
+        mkdir -p ${{ github.workspace }}/ort/results
+        docker run -v ${{ github.workspace }}:/project -v $NPM_CONFIG_USERCONFIG:/root/.npmrc -e NODE_AUTH_TOKEN --entrypoint /bin/bash philipssoftware/ort:latest -c "cd /project; env; cat .npmrc; npm install --ignore-scripts; cat /root/.npm/_logs/*-debug.log; true"
+        docker run -v ${{ github.workspace }}:/project -v $NPM_CONFIG_USERCONFIG:/root/.npmrc -e NODE_AUTH_TOKEN=${{secrets.ALL_PACKAGE_TOKEN}} philipssoftware/ort:latest --info analyze -i /project -o /project/ort --package-curations-file /project/curations.yml || true
+        cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
