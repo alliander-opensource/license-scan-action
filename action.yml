@@ -9,7 +9,7 @@ runs:
         set -o xtrace
         mkdir -p ${{ github.workspace }}/ort/results
 
-        docker run \
+        docker run --rm \
         -v ${{ github.workspace }}:/project \
         -v $NPM_CONFIG_USERCONFIG:/root/.npmrc \
         -e NODE_AUTH_TOKEN philipssoftware/ort:latest \
@@ -20,3 +20,35 @@ runs:
         --package-curations-file /project/curations.yml
 
         cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
+    - name: Evaluate
+      # TODO: make optional while maintaining in- and output file chain
+      # TODO: enable dynamically downloading evaluation rules and classifications
+      shell: bash
+      run: |
+        docker run --rm \
+        -v ${{ github.workspace }}:/project \
+        philipssoftware/ort:latest \
+        --info \
+        evaluate \
+        -i /project/ort/analyzer-result.yml \
+        -o /project/ort \
+        --license-classifications-file /project/ort-license-classifications.yml \
+        --rules-file /project/ort-rules.kts
+        --package-curations-file /project/curations.yml
+
+        cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
+    - name: Report
+      # TODO: make reports configurable
+      shell: bash
+      run: |
+        docker run --rm \
+        -v ${{ github.workspace }}:/project \
+        -v $NPM_CONFIG_USERCONFIG:/root/.npmrc \
+        philipssoftware/ort:latest \
+        --info \
+        report \
+        -f SpdxDocument,StaticHtml,WebApp \
+        -i /project/ort/evaluation-result.yml \
+        -o /project/ort/reports
+
+        cp -r ${{ github.workspace }}/ort/reports ${{ github.workspace }}/ort/results/
