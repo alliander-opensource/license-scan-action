@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: Analyze
+      shell: bash
       run: |
         set -o xtrace
         mkdir -p ${{ github.workspace }}/ort/results
