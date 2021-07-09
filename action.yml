@@ -4,6 +4,14 @@
 
 name: 'OSPO License scan action'
 description: 'A GitHub Action to scan for licenses in your code.'
+inputs:
+  report-formats:
+    description: |
+      Desired output formats for the `ort report -f` command, provided in a comma-separated format.
+      For example 'SpdxDocument,WebApp'
+      Documentation at https://github.com/oss-review-toolkit/ort/#user-content-reporter
+    required: false
+    default: 'SpdxDocument,WebApp'
 runs:
   using: "composite"
   steps:
@@ -52,7 +60,7 @@ runs:
         philipssoftware/ort:latest \
         --info \
         report \
-        -f SpdxDocument,StaticHtml,WebApp \
+        -f ${{ inputs.report-formats }} \
         -i /project/ort/evaluation-result.yml \
         -o /project/ort/reports
 
