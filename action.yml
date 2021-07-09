@@ -3,11 +3,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: 'OSPO License scan action'
-description: 'A GitHub Action created by the Alliander Open Source Program Office (OSPO) to scan for licenses in your code.'
+description: 'A GitHub Action to scan for licenses in your code.'
 runs:
   using: "composite"
   steps:
     - name: Analyze
+      # TODO: what is a logical location to place the files?
       shell: bash
       run: |
         set -o xtrace
