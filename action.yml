@@ -38,7 +38,7 @@ runs:
         -i /project/ort/analyzer-result.yml \
         -o /project/ort \
         --license-classifications-file /project/ort-license-classifications.yml \
-        --rules-file /project/ort-rules.kts
+        --rules-file /project/ort-rules.kts \
         --package-curations-file /project/curations.yml
 
         cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
