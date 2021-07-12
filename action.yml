@@ -7,7 +7,7 @@ description: 'A GitHub Action to scan for licenses in your code.'
 inputs:
   config-dir:
     description: |
-      Directory that contains the ORT config files like `ort.conf`, `rules.kts` and `license-classifications.yml`.
+      Directory that contains the ORT config files like `ort.conf`, `curations.yml`, `rules.kts` and `license-classifications.yml`.
     required: false
   report-formats:
     description: |
@@ -42,7 +42,7 @@ runs:
         cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
     - name: Evaluate
       # TODO: make optional while maintaining in- and output file chain
-      # TODO: enable dynamically downloading evaluation rules and classifications
+      # TODO: enable dynamically downloading evaluation rules and classifications --> available through config-dir input
       shell: bash
       run: |
         docker run --rm \
@@ -54,8 +54,6 @@ runs:
         evaluate \
         -i /project/ort/analyzer-result.yml \
         -o /project/ort \
-        --license-classifications-file /project/ort-license-classifications.yml \
-        --rules-file /project/ort-rules.kts \
         --package-curations-file /project/curations.yml
 
         cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
