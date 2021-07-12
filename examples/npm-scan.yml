@@ -1,0 +1,39 @@
+name: ORT license scan
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout PR branch
+      uses: actions/checkout@v2
+
+    - name: Clone ORT config
+      uses: actions/checkout@v2
+      with:
+        repository: mycorp/ort-config
+        path: ort-config
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        always-auth: true
+        node-version: '12.x'
+        registry-url: https://npm.pkg.github.com
+        scope: '@mycorp'
+
+    - name: License scanning
+      uses: alliander-opensource/license-scan-action@main
+      with:
+        config-dir: ort-config
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.ALL_PACKAGE_TOKEN}}
+
+    - name: Store results
+      uses: actions/upload-artifact@v2
+      with:
+        name: license-scan-results
+        path: ${{ github.workspace }}/ort/results/
