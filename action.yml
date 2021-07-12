@@ -6,6 +6,7 @@ name: 'OSPO License scan action'
 description: 'A GitHub Action to scan for licenses in your code.'
 inputs:
   config-dir:
+    # NOTE assumes this is part of the github.workspace and a relative path, so there is no need for a separate volume mount
     description: |
       Directory that contains the ORT config files like `ort.conf`, `curations.yml`, `rules.kts` and `license-classifications.yml`.
     required: false
@@ -29,9 +30,8 @@ runs:
         docker run --rm \
         -v ${{ github.workspace }}:/project \
         -v $NPM_CONFIG_USERCONFIG:/root/.npmrc \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-v ${{ inputs.config-dir }}:/root/ort-conf"; fi) \
         -e NODE_AUTH_TOKEN \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/root/ort-conf"; fi) \
+        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
         philipssoftware/ort:latest \
         --info \
         analyze \
@@ -47,8 +47,7 @@ runs:
       run: |
         docker run --rm \
         -v ${{ github.workspace }}:/project \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-v ${{ inputs.config-dir }}:/root/ort-conf"; fi) \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/root/ort-conf"; fi) \
+        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
         philipssoftware/ort:latest \
         --info \
         evaluate \
@@ -63,8 +62,7 @@ runs:
       run: |
         docker run --rm \
         -v ${{ github.workspace }}:/project \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-v ${{ inputs.config-dir }}:/root/ort-conf"; fi) \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/root/ort-conf"; fi) \
+        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
         philipssoftware/ort:latest \
         --info \
         report \
