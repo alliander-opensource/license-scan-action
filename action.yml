@@ -41,7 +41,6 @@ runs:
         cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
     - name: Evaluate
       # TODO: make optional while maintaining in- and output file chain
-      # TODO: enable dynamically downloading evaluation rules and classifications --> available through config-dir input
       shell: bash
       run: |
         docker run --rm \
