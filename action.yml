@@ -6,14 +6,13 @@ name: 'OSPO License scan action'
 description: 'A GitHub Action to scan for licenses in your code.'
 inputs:
   config-dir:
-    # NOTE assumes this is part of the github.workspace and a relative path, so there is no need for a separate volume mount
     description: |
-      Directory that contains the ORT config files like `ort.conf`, `curations.yml`, `rules.kts` and `license-classifications.yml`.
+      Directory relative to the project rooth that contains the ORT config files like `ort.conf`, `curations.yml`, `rules.kts` and `license-classifications.yml`.
     required: false
   report-formats:
     description: |
       Desired output formats for the `ort report -f` command, provided in a comma-separated format.
-      For example 'SpdxDocument,WebApp'
+      For example 'SpdxDocument,WebApp'.
       Documentation at https://github.com/oss-review-toolkit/ort/#user-content-reporter
     required: false
     default: 'SpdxDocument,WebApp'
