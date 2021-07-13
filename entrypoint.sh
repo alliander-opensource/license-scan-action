@@ -30,14 +30,16 @@ cp "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" "${GITHUB_WORKSPACE}/ort/result
 
 # Evaluate
 
-/opt/ort/bin/ort \
-    --info \
-    evaluate \
-    -i "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" \
-    -o "${GITHUB_WORKSPACE}/ort" \
-    --package-curations-file "${GITHUB_WORKSPACE}/curations.yml"
+if "${ RUN_EVALUATE }"; then
+    /opt/ort/bin/ort \
+        --info \
+        evaluate \
+        -i "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" \
+        -o "${GITHUB_WORKSPACE}/ort" \
+        --package-curations-file "${GITHUB_WORKSPACE}/curations.yml"
 
-cp "${GITHUB_WORKSPACE}/ort/evaluation-result.yml" "${GITHUB_WORKSPACE}/ort/results/"
+    cp "${GITHUB_WORKSPACE}/ort/evaluation-result.yml" "${GITHUB_WORKSPACE}/ort/results/"
+fi
 
 # Report
 
@@ -47,4 +49,4 @@ cp "${GITHUB_WORKSPACE}/ort/evaluation-result.yml" "${GITHUB_WORKSPACE}/ort/resu
     $(if [[ -e "${GITHUB_WORKSPACE}/ort/evaluation-result.yml"]] ; then echo "-i ${GITHUB_WORKSPACE}/ort/evaluation-result.yml"; else echo "-i ${GITHUB_WORKSPACE}/ort/analyzer-result.yml") \
     -o "${GITHUB_WORKSPACE}/ort/reports" \
 
-cp "${GITHUB_WORKSPACE}/ort/evaluation-result.yml" "${GITHUB_WORKSPACE}/ort/results/"
+cp "${GITHUB_WORKSPACE}/ort/reports" "${GITHUB_WORKSPACE}/ort/results/"
