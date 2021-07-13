@@ -29,6 +29,7 @@ jobs:
       uses: alliander-opensource/license-scan-action@main
       with:
         config-dir: ort-config
+        # run-evaluate: false
       env:
         NODE_AUTH_TOKEN: ${{secrets.ALL_PACKAGE_TOKEN}}
 

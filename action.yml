@@ -16,6 +16,11 @@ inputs:
       Documentation at https://github.com/oss-review-toolkit/ort/#user-content-reporter
     required: false
     default: 'SpdxDocument,WebApp'
+  run-evaluate:
+    description: |
+      Boolean value which determines whether the ORT evaluate step should run
+    required: false
+    default: true
 runs:
   using: "composite"
   steps:
@@ -43,19 +48,20 @@ runs:
       # TODO: make optional while maintaining in- and output file chain
       shell: bash
       run: |
-        docker run --rm \
-        -v ${{ github.workspace }}:/project \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
-        philipssoftware/ort:latest \
-        --info \
-        evaluate \
-        -i /project/ort/analyzer-result.yml \
-        -o /project/ort \
-        --package-curations-file /project/curations.yml
+        if ${{ inputs.run-evaluate }}; then
+          docker run --rm \
+          -v ${{ github.workspace }}:/project \
+          $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
+          philipssoftware/ort:latest \
+          --info \
+          evaluate \
+          -i /project/ort/analyzer-result.yml \
+          -o /project/ort \
+          --package-curations-file /project/curations.yml
 
-        cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
+          cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
+        fi
     - name: Report
-      # TODO: make reports configurable
       shell: bash
       run: |
         docker run --rm \
@@ -65,7 +71,7 @@ runs:
         --info \
         report \
         -f ${{ inputs.report-formats }} \
-        -i /project/ort/evaluation-result.yml \
+        $(if [[ -e "/project/ort/evaluation-results.yml" ]] ; then echo "-i /project/ort/evaluation-result.yml"; else echo "-i /project/ort/analyzer-result.yml"; fi) \
         -o /project/ort/reports
 
         cp -r ${{ github.workspace }}/ort/reports ${{ github.workspace }}/ort/results/
