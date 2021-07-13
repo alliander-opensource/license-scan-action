@@ -49,4 +49,4 @@ fi
     $(if [[ -e "${GITHUB_WORKSPACE}/ort/evaluation-result.yml"]] ; then echo "-i ${GITHUB_WORKSPACE}/ort/evaluation-result.yml"; else echo "-i ${GITHUB_WORKSPACE}/ort/analyzer-result.yml") \
     -o "${GITHUB_WORKSPACE}/ort/reports" \
 
-cp "${GITHUB_WORKSPACE}/ort/reports" "${GITHUB_WORKSPACE}/ort/results/"
+cp -r "${GITHUB_WORKSPACE}/ort/reports" "${GITHUB_WORKSPACE}/ort/results/"
