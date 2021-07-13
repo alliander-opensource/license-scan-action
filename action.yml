@@ -70,7 +70,7 @@ runs:
         --info \
         report \
         -f ${{ inputs.report-formats }} \
-        $(if [[ -e "/project/ort/evaluation-results.yml" ]] ; then echo "-i /project/ort/evaluation-result.yml"; else echo "-i /project/ort/analyzer-result.yml"; fi) \
+        $(if [[ -e "/project/ort/evaluation-result.yml" ]] ; then echo "-i /project/ort/evaluation-result.yml"; else echo "-i /project/ort/analyzer-result.yml"; fi) \
         -o /project/ort/reports
 
         cp -r ${{ github.workspace }}/ort/reports ${{ github.workspace }}/ort/results/
