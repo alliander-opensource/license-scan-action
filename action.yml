@@ -62,7 +62,6 @@ runs:
           cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
         fi
     - name: Report
-      # TODO: make reports configurable
       shell: bash
       run: |
         docker run --rm \
