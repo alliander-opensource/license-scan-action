@@ -51,7 +51,7 @@ fi
     --info \
     report \
     -f "${REPORT_FORMATS}" \
-    $(if [[ -e "ort/evaluation-result.yml"]] ; then echo "ort/evaluation-result.yml" ; else echo "ort/analyzer-result.yml") \
+    $(if [[ -e "ort/evaluation-result.yml"]] ; then echo "ort/evaluation-result.yml"; else echo "ort/analyzer-result.yml"; fi) \
     -i evaluation/result-yml \
     -o ort/reports \
 
