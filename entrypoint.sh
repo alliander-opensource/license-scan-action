@@ -26,6 +26,10 @@ mkdir -p "ort/reports"
     -o "ort" \
     --package-curations-file "curations.yml"
 
+# temporary debugging
+ls -la "ort/"
+ls -la "ort/results"
+
 cp "ort/analyzer-result.yml" "ort/results/"
 
 # Evaluate
