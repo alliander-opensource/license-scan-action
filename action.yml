@@ -45,7 +45,6 @@ runs:
 
         cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
     - name: Evaluate
-      # TODO: make optional while maintaining in- and output file chain
       shell: bash
       run: |
         if ${{ inputs.run-evaluate }}; then
