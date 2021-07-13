@@ -30,7 +30,7 @@ cp "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" "${GITHUB_WORKSPACE}/ort/result
 
 # Evaluate
 
-if "${ RUN_EVALUATE }"; then
+if "${RUN_EVALUATE}"; then
     /opt/ort/bin/ort \
         --info \
         evaluate \
