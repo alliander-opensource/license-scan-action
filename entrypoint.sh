@@ -15,18 +15,18 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-mkdir -p "${GITHUB_WORKSPACE}/ort/reports"
+mkdir -p "ort/reports"
 
 # Analyze
 
 /opt/ort/bin/ort \
     --info \
     analyze \
-    -i "${GITHUB_WORKSPACE}" \
-    -o "${GITHUB_WORKSPACE}/ort" \
-    --package-curations-file "${GITHUB_WORKSPACE}/curations.yml"
+    -i "." \
+    -o "ort" \
+    --package-curations-file "curations.yml"
 
-cp "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" "${GITHUB_WORKSPACE}/ort/results/"
+cp "ort/analyzer-result.yml" "ort/results/"
 
 # Evaluate
 
@@ -34,11 +34,11 @@ if "${RUN_EVALUATE}"; then
     /opt/ort/bin/ort \
         --info \
         evaluate \
-        -i "${GITHUB_WORKSPACE}/ort/analyzer-result.yml" \
-        -o "${GITHUB_WORKSPACE}/ort" \
-        --package-curations-file "${GITHUB_WORKSPACE}/curations.yml"
+        -i "ort/analyzer-result.yml" \
+        -o "ort" \
+        --package-curations-file "curations.yml"
 
-    cp "${GITHUB_WORKSPACE}/ort/evaluation-result.yml" "${GITHUB_WORKSPACE}/ort/results/"
+    cp "ort/evaluation-result.yml" "ort/results/"
 fi
 
 # Report
@@ -46,7 +46,7 @@ fi
 /opt/ort/bin/ort \
     --info \
     report \
-    $(if [[ -e "${GITHUB_WORKSPACE}/ort/evaluation-result.yml"]] ; then echo "-i ${GITHUB_WORKSPACE}/ort/evaluation-result.yml"; else echo "-i ${GITHUB_WORKSPACE}/ort/analyzer-result.yml") \
-    -o "${GITHUB_WORKSPACE}/ort/reports" \
+    $(if [[ -e "ort/evaluation-result.yml"]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml") \
+    -o "ort/reports" \
 
-cp -r "${GITHUB_WORKSPACE}/ort/reports" "${GITHUB_WORKSPACE}/ort/results/"
+cp -r "ort/reports" "ort/results/"
