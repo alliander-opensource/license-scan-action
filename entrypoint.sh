@@ -17,6 +17,9 @@ done
 
 mkdir -p "ort/reports"
 
+# TODO: remove in favor of mentioning outputs as intended by GitHub Actions
+mkdir -p "ort/results"
+
 # Analyze
 
 /opt/ort/bin/ort \
@@ -25,10 +28,6 @@ mkdir -p "ort/reports"
     -i "." \
     -o "ort" \
     --package-curations-file "curations.yml"
-
-# temporary debugging
-ls -la "ort/"
-ls -la "ort/results"
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
