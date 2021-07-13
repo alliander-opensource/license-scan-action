@@ -40,6 +40,7 @@ if "${RUN_EVALUATE}"; then
         -i "ort/analyzer-result.yml" \
         -o "ort" \
         --package-curations-file "curations.yml"
+    # TODO: perhaps capture exit status and re-raise at the end
 
     cp "ort/evaluation-result.yml" "ort/results/"
 fi
@@ -49,7 +50,9 @@ fi
 /opt/ort/bin/ort \
     --info \
     report \
-    $(if [[ -e "ort/evaluation-result.yml"]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml") \
-    -o "ort/reports" \
+    -f "${REPORT_FORMATS}" \
+    $(if [[ -e "ort/evaluation-result.yml"]] ; then echo "ort/evaluation-result.yml" ; else echo "ort/analyzer-result.yml") \
+    -i evaluation/result-yml \
+    -o ort/reports \
 
 cp -r "ort/reports" "ort/results/"
