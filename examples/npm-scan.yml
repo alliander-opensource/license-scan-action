@@ -35,7 +35,7 @@ jobs:
       with:
         # run-evaluate: false
       env:
-        NODE_CONFIG_USERCONFIG: '/github/workspace/.npmrc'
+        NPM_CONFIG_USERCONFIG: '/github/workspace/.npmrc'
         NODE_AUTH_TOKEN: ${{secrets.ALL_PACKAGE_TOKEN}}
         ORT_CONFIG_DIR: '/github/workspace/ort-config/'
 
