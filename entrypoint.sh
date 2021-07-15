@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# Provide convenient debug information
+
 set -o xtrace
+
+# Parsing commandline arguments into variables
 
 while [[ $# -gt 0 ]]; do
     option="$1"
@@ -32,6 +36,8 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+# Prepare directory structure
 
 mkdir -p "ort/reports"
 
