@@ -39,6 +39,7 @@ cp "ort/analyzer-result.yml" "ort/results/"
 
 # Download
 
+# TODO: It might be worthwhile to allow changing the output location
 if "${RUN_DOWNLOAD}"; then
     /opt/ort/bin/ort \
         --info \
