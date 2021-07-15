@@ -15,6 +15,9 @@ while [[ $# -gt 0 ]]; do
         --run-report)
             RUN_REPORT="$2"
             shift; shift;;
+        --run-scan)
+            RUN_SCAN="$2"
+            shift; shift;;
         --report-formats)
             REPORT_FORMATS="$2"
             shift; shift;;
