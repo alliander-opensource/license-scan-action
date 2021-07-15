@@ -57,7 +57,8 @@ if "${RUN_DOWNLOAD}"; then
         -o "ort/download"
 fi
 
-# TODO Scanner
+# Scan
+
 if "${RUN_SCAN}"; then
     /opt/ort/bin/ort \
         --info \
@@ -66,8 +67,6 @@ if "${RUN_SCAN}"; then
         -o "ort/"
     LAST_OUTPUT_FILE="ort/scan-result.yml"
 fi
-
-# TODO Evaluator
 
 # Evaluate
 
