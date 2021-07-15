@@ -34,6 +34,7 @@ mkdir -p "ort/results"
     -i "." \
     -o "ort" \
     --package-curations-file "curations.yml"
+LAST_OUTPUT_FILE="ort/analyzer-result.yml"
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
@@ -58,10 +59,12 @@ if "${RUN_EVALUATE}"; then
     /opt/ort/bin/ort \
         --info \
         evaluate \
-        -i "ort/analyzer-result.yml" \
+        -i "${LAST_OUTPUT_FILE}" \
         -o "ort" \
         --package-curations-file "curations.yml"
     # TODO: perhaps capture exit status and re-raise at the end
+
+    LAST_OUTPUT_FILE="ort/evaluation-result.yml"
 
     cp "ort/evaluation-result.yml" "ort/results/"
 fi
@@ -73,7 +76,7 @@ if "${RUN_REPORT}"; then
         --info \
         report \
         -f "${REPORT_FORMATS}" \
-        $(if [[ -e "ort/evaluation-result.yml" ]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml"; fi) \
+        -i "${LAST_OUTPUT_FILE}" \
         -o ort/reports
 
     cp -r "ort/reports" "ort/results/"
