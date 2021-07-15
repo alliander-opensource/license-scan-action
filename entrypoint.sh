@@ -9,6 +9,9 @@ while [[ $# -gt 0 ]]; do
         --run-evaluate)
             RUN_EVALUATE="$2"
             shift; shift;;
+        --run-report)
+            RUN_REPORT="$2"
+            shift; shift;;
         --report-formats)
             REPORT_FORMATS="$2"
             shift; shift;;
@@ -53,11 +56,13 @@ fi
 
 # Report
 
-/opt/ort/bin/ort \
-    --info \
-    report \
-    -f "${REPORT_FORMATS}" \
-    $(if [[ -e "ort/evaluation-result.yml" ]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml"; fi) \
-    -o ort/reports
+if "${RUN_REPORT}"; then
+    /opt/ort/bin/ort \
+        --info \
+        report \
+        -f "${REPORT_FORMATS}" \
+        $(if [[ -e "ort/evaluation-result.yml" ]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml"; fi) \
+        -o ort/reports
 
-cp -r "ort/reports" "ort/results/"
+    cp -r "ort/reports" "ort/results/"
+fi

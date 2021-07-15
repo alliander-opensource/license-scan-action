@@ -14,7 +14,12 @@ inputs:
     default: 'SpdxDocument,WebApp'
   run-evaluate:
     description: |
-      Boolean value which determines whether the ORT evaluate step should run
+      Boolean value which determines whether the ORT Evaluate step should run
+    required: false
+    default: true
+  run-report:
+    description: |
+      Boolean value which determines whether the ORT Report step should run
     required: false
     default: true
 runs:
@@ -25,3 +30,5 @@ runs:
     - ${{ inputs.report-formats }}
     - '--run-evaluate'
     - ${{ inputs.run-evaluate }}
+    - '--run-report'
+    - ${{ inputs.run-report }}
