@@ -8,19 +8,24 @@ while [[ $# -gt 0 ]]; do
     case $option in
         --run-download)
             RUN_DOWNLOAD="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --run-evaluate)
             RUN_EVALUATE="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --run-report)
             RUN_REPORT="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --run-scan)
             RUN_SCAN="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --report-formats)
             REPORT_FORMATS="$2"
-            shift; shift;;
+            shift; shift
+            ;;
     esac
 done
 
