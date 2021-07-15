@@ -27,6 +27,11 @@ inputs:
       Boolean value which determines whether the ORT Report step should run
     required: false
     default: true
+  run-scan:
+    description: |
+      Boolean value which determines whether the ORT Scan step should run
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -39,3 +44,5 @@ runs:
     - ${{ inputs.run-evaluate }}
     - '--run-report'
     - ${{ inputs.run-report }}
+    - '--run-scan'
+    - ${{ inputs.run-scan }}

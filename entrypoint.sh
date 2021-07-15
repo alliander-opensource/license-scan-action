@@ -8,16 +8,24 @@ while [[ $# -gt 0 ]]; do
     case $option in
         --run-download)
             RUN_DOWNLOAD="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --run-evaluate)
             RUN_EVALUATE="$2"
-            shift; shift;;
+            shift; shift
+            ;;
         --run-report)
             RUN_REPORT="$2"
-            shift; shift;;
+            shift; shift
+            ;;
+        --run-scan)
+            RUN_SCAN="$2"
+            shift; shift
+            ;;
         --report-formats)
             REPORT_FORMATS="$2"
-            shift; shift;;
+            shift; shift
+            ;;
     esac
 done
 
@@ -34,6 +42,7 @@ mkdir -p "ort/results"
     -i "." \
     -o "ort" \
     --package-curations-file "curations.yml"
+LAST_OUTPUT_FILE="ort/analyzer-result.yml"
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
@@ -48,9 +57,16 @@ if "${RUN_DOWNLOAD}"; then
         -o "ort/download"
 fi
 
-# TODO Scanner
+# Scan
 
-# TODO Evaluator
+if "${RUN_SCAN}"; then
+    /opt/ort/bin/ort \
+        --info \
+        scan \
+        -i "ort/analyzer-result.yml" \
+        -o "ort/"
+    LAST_OUTPUT_FILE="ort/scan-result.yml"
+fi
 
 # Evaluate
 
@@ -58,10 +74,12 @@ if "${RUN_EVALUATE}"; then
     /opt/ort/bin/ort \
         --info \
         evaluate \
-        -i "ort/analyzer-result.yml" \
+        -i "${LAST_OUTPUT_FILE}" \
         -o "ort" \
         --package-curations-file "curations.yml"
     # TODO: perhaps capture exit status and re-raise at the end
+
+    LAST_OUTPUT_FILE="ort/evaluation-result.yml"
 
     cp "ort/evaluation-result.yml" "ort/results/"
 fi
@@ -73,7 +91,7 @@ if "${RUN_REPORT}"; then
         --info \
         report \
         -f "${REPORT_FORMATS}" \
-        $(if [[ -e "ort/evaluation-result.yml" ]] ; then echo "-i ort/evaluation-result.yml"; else echo "-i ort/analyzer-result.yml"; fi) \
+        -i "${LAST_OUTPUT_FILE}" \
         -o ort/reports
 
     cp -r "ort/reports" "ort/results/"

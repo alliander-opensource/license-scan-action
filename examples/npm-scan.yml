@@ -35,6 +35,7 @@ jobs:
       with:
         # run-evaluate: false
         # run-download: true
+        # run-scan: true
         # run-report: false
       env:
         NPM_CONFIG_USERCONFIG: '/github/workspace/.npmrc'
