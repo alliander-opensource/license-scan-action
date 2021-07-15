@@ -37,7 +37,7 @@ mkdir -p "ort/results"
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
-# TODO Downloader
+# Download
 
 if "${RUN_DOWNLOAD}"; then
     /opt/ort/bin/ort \
