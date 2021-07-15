@@ -50,6 +50,14 @@ if "${RUN_DOWNLOAD}"; then
 fi
 
 # TODO Scanner
+if "${RUN_SCAN}"; then
+    /opt/ort/bin/ort \
+        --info \
+        scan \
+        -i "ort/analyzer-result.yml" \
+        -o "ort/"
+    LAST_OUTPUT_FILE="ort/scan-result.yml"
+fi
 
 # TODO Evaluator
 
