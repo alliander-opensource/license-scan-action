@@ -34,6 +34,7 @@ jobs:
       uses: alliander-opensource/license-scan-action@main
       with:
         # run-evaluate: false
+        # run-download: true
         # run-report: false
       env:
         NPM_CONFIG_USERCONFIG: '/github/workspace/.npmrc'
