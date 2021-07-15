@@ -12,6 +12,11 @@ inputs:
       Documentation at https://github.com/oss-review-toolkit/ort/#user-content-reporter
     required: false
     default: 'SpdxDocument,WebApp'
+  run-download:
+    description: |
+      Boolean value which determines whether the ORT Download step should run
+    required: false
+    default: false
   run-evaluate:
     description: |
       Boolean value which determines whether the ORT Evaluate step should run
@@ -28,6 +33,8 @@ runs:
   args:
     - '--report-formats'
     - ${{ inputs.report-formats }}
+    - '--run-download'
+    - ${{ inputs.run-download }}
     - '--run-evaluate'
     - ${{ inputs.run-evaluate }}
     - '--run-report'

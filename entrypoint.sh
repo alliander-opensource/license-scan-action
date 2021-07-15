@@ -6,6 +6,9 @@ while [[ $# -gt 0 ]]; do
     option="$1"
 
     case $option in
+        --run-download)
+            RUN_DOWNLOAD="$2"
+            shift; shift;;
         --run-evaluate)
             RUN_EVALUATE="$2"
             shift; shift;;
@@ -35,6 +38,14 @@ mkdir -p "ort/results"
 cp "ort/analyzer-result.yml" "ort/results/"
 
 # TODO Downloader
+
+if "${RUN_DOWNLOAD}"; then
+    /opt/ort/bin/ort \
+        --info \
+        download \
+        -i "ort/analyzer-result.yml" \
+        -o "ort/download"
+fi
 
 # TODO Scanner
 
