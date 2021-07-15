@@ -25,13 +25,19 @@ jobs:
         registry-url: https://npm.pkg.github.com
         scope: '@mycorp'
 
+    - name: Copy set global .npmrc from root to a project path
+      shell: bash
+      run: |
+        cp $NPM_CONFIG_USERCONFIG ${{ github.workspace }}/.npmrc
+
     - name: License scanning
       uses: alliander-opensource/license-scan-action@main
       with:
-        config-dir: ort-config
         # run-evaluate: false
       env:
+        NPM_CONFIG_USERCONFIG: '/github/workspace/.npmrc'
         NODE_AUTH_TOKEN: ${{secrets.ALL_PACKAGE_TOKEN}}
+        ORT_CONFIG_DIR: '/github/workspace/ort-config/'
 
     - name: Store results
       uses: actions/upload-artifact@v2

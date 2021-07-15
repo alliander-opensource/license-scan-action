@@ -5,10 +5,6 @@
 name: 'OSPO License scan action'
 description: 'A GitHub Action to scan for licenses in your code.'
 inputs:
-  config-dir:
-    description: |
-      Directory relative to the project rooth that contains the ORT config files like `ort.conf`, `curations.yml`, `rules.kts` and `license-classifications.yml`.
-    required: false
   report-formats:
     description: |
       Desired output formats for the `ort report -f` command, provided in a comma-separated format.
@@ -22,55 +18,10 @@ inputs:
     required: false
     default: true
 runs:
-  using: "composite"
-  steps:
-    - name: Analyze
-      # TODO: what is a logical location to place the files?
-      shell: bash
-      run: |
-        set -o xtrace
-        mkdir -p ${{ github.workspace }}/ort/results
-
-        docker run --rm \
-        -v ${{ github.workspace }}:/project \
-        -v $NPM_CONFIG_USERCONFIG:/root/.npmrc \
-        -e NODE_AUTH_TOKEN \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
-        philipssoftware/ort:latest \
-        --info \
-        analyze \
-        -i /project \
-        -o /project/ort \
-        --package-curations-file /project/curations.yml
-
-        cp ${{ github.workspace }}/ort/analyzer-result.yml ${{ github.workspace }}/ort/results/
-    - name: Evaluate
-      shell: bash
-      run: |
-        if ${{ inputs.run-evaluate }}; then
-          docker run --rm \
-          -v ${{ github.workspace }}:/project \
-          $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
-          philipssoftware/ort:latest \
-          --info \
-          evaluate \
-          -i /project/ort/analyzer-result.yml \
-          -o /project/ort \
-          --package-curations-file /project/curations.yml
-
-          cp ${{ github.workspace }}/ort/evaluation-result.yml ${{ github.workspace }}/ort/results/
-        fi
-    - name: Report
-      shell: bash
-      run: |
-        docker run --rm \
-        -v ${{ github.workspace }}:/project \
-        $(if [[ -n "${{ inputs.config-dir }}" ]] ; then echo "-e ORT_CONFIG_DIR=/project/${{ inputs.config-dir}}"; fi) \
-        philipssoftware/ort:latest \
-        --info \
-        report \
-        -f ${{ inputs.report-formats }} \
-        $(if [[ -e "/project/ort/evaluation-result.yml" ]] ; then echo "-i /project/ort/evaluation-result.yml"; else echo "-i /project/ort/analyzer-result.yml"; fi) \
-        -o /project/ort/reports
-
-        cp -r ${{ github.workspace }}/ort/reports ${{ github.workspace }}/ort/results/
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - '--report-formats'
+    - ${{ inputs.report-formats }}
+    - '--run-evaluate'
+    - ${{ inputs.run-evaluate }}
