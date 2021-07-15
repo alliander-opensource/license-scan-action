@@ -26,6 +26,10 @@ while [[ $# -gt 0 ]]; do
             REPORT_FORMATS="$2"
             shift; shift
             ;;
+        *)
+            echo "ERROR: Found unknown commandline argument: ${1}"
+            exit 1
+            ;;
     esac
 done
 
