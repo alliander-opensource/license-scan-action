@@ -31,6 +31,12 @@ mkdir -p "ort/results"
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
+# TODO Downloader
+
+# TODO Scanner
+
+# TODO Evaluator
+
 # Evaluate
 
 if "${RUN_EVALUATE}"; then
