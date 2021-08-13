@@ -54,8 +54,7 @@ mkdir -p "ort/results"
     --info \
     analyze \
     -i "." \
-    -o "ort" \
-    --package-curations-file "curations.yml"
+    -o "ort"
 LAST_OUTPUT_FILE="ort/analyzer-result.yml"
 
 cp "ort/analyzer-result.yml" "ort/results/"
