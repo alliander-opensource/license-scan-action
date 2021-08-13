@@ -8,6 +8,14 @@
 
 set -o xtrace
 
+# Set default values for variables
+
+RUN_DOWNLOAD="false"
+RUN_EVALUATE="true"
+RUN_REPORT="true"
+RUN_SCAN="false"
+REPORT_FORMATS="SpdxDocument,WebApp"
+
 # Parsing commandline arguments into variables
 
 while [[ $# -gt 0 ]]; do
