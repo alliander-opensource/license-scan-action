@@ -88,8 +88,7 @@ if "${RUN_EVALUATE}"; then
         --info \
         evaluate \
         -i "${LAST_OUTPUT_FILE}" \
-        -o "ort" \
-        --package-curations-file "curations.yml"
+        -o "ort"
     # TODO: perhaps capture exit status and re-raise at the end
 
     LAST_OUTPUT_FILE="ort/evaluation-result.yml"
