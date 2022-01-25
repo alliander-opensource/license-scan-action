@@ -20,15 +20,13 @@ The Technical Steering Committee (TSC) is responsible for:
 1. Raise subjects/issues that are important for the direction/development of this project
 
 The community council consists of the following members:
-1. Aditya Hekker
-1. Tony Xiang
-1. Werner van Westering
-1. Jonas van den Bogaard
+1. Nico Rikken
+2. Jonas van den Bogaard
 
-Aditya Hekker will chair the TSC.
+Nico Rikken will chair the TSC.
 
 Any community member or Contributor can ask that something 
-be reviewed by the TSC by contacting the TSC at <dynamic.grid.calculation@alliander.com>.
+be reviewed by the TSC by contacting the TSC at <OSPO@alliander.com>.
 
 ## Maintainers
 
@@ -42,9 +40,8 @@ Maintainers are responsible for maintaining parts of the code-base. Maintainers 
 1. In case of long discussions or arguments, maintainers or other can request a community council decision.
 
 The current maintainers of this project are:
-1. Tony Xiang
-1. Peter Salemink
-1. Bram Stoeller
+1. Nico Rikken
+2. Jonas van den Bogaard
 
 Any community member or Contributor can ask a question or raise an issue to the maintainers by logging a GitHub issue.
 
@@ -55,27 +52,3 @@ Contributors include anyone in the technical community that contributes code, do
 Anyone can become a contributor. 
 There is no expectation of commitment to the project, no specific skill requirements and no selection process. 
 To become a contributor, a community member simply has to perform one or more actions that are beneficial to the project.
-
-### Notable Non-Code Contributors
-
-The code contributors (who pushed commits into the repository) are automatically maintained by GitHub.
-However, many people have been contributing to this project in other forms with commiting any code, e.g., 
-developing new mathematical algorithms.
-To honor their contribution, we mention their names as non-code contributors as below:
-
-* Werner van Westering: algorithm design
-* Jacco Heres: algorithm test
-* Thijs Baaijen: test for macOS support
-
-### Historical Contributors
-
-Our gratitude goes to the following contributors who have worked (and maybe still be working) 
-in this project before it became open source:
-
-* Werner van Westering
-* Sanne Korzec
-* Jonas van den Bogaard
-* Bram Stoeller
-* Démian Janssen
-* Peter Salemink
-* Tony Xiang
