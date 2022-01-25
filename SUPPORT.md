@@ -6,14 +6,14 @@ SPDX-License-Identifier: Apache-2.0
 
 # Getting Help
 
-There are a few ways to connect with the `power-grid-model` project:
+There are a few ways to connect with the `license scan action` project:
 
 * Submit an issue
 * Send an email to the maintainers: <OSPO@alliander.com>.
 
 ## How to ask for help, suggest a feature, or give recommendations.
 
-If you have trouble installing, building, or using Power Grid Model, 
+If you have trouble installing, building, or using license scan action, 
 but there's not yet reason to suspect you've encountered a genuine bug,
 you can ask a question in the Discussions tab of the repository.
 
