@@ -1,7 +1,7 @@
 <!--
-SPDX-FileCopyrightText: 2022 Contributors to the Power Grid Model project <dynamic.grid.calculation@alliander.com>
+SPDX-FileCopyrightText: 2022 Contributors to the License scan action project <OSPO@alliander.com>
 
-SPDX-License-Identifier: MPL-2.0
+SPDX-License-Identifier: Apache-2.0
 -->
 
 # Getting Help
@@ -9,7 +9,7 @@ SPDX-License-Identifier: MPL-2.0
 There are a few ways to connect with the `power-grid-model` project:
 
 * Submit an issue
-* Send an email to the Technical Steering Committee: <dynamic.grid.calculation@alliander.com>.
+* Send an email to the maintainers: <OSPO@alliander.com>.
 
 ## How to ask for help, suggest a feature, or give recommendations.
 
@@ -25,21 +25,10 @@ you can also propose it in the Discussions tab.
 This project manages bug and enhancement using the GitHub issue tracker. 
 The various issue templates will guide you on making an effective report.
 
-### Input data validity check
-
-In many cases the problem is in the input data. 
-We have an extensive input data validity check to help you with this.
-Pleas refer to this [notebook](examples/Validation%20Examples.ipynb).
-
-### Dump input/output data
-
-To effectively report an issue we need a data dump of input and output.
-Please refer to this [notebook](examples/Make%20Test%20Dataset.ipynb) on how to do it.
-
 ## How to report a security vulnerability
 
 If you think you've found a potential vulnerability in this project, please
-email <dynamic.grid.calculation@alliander.com> to responsibly disclose it.
+email <OSPO@alliander.com> to responsibly disclose it.
 
 ## Contributing a fix
 
