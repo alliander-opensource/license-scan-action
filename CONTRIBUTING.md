@@ -1,7 +1,7 @@
 <!--
-SPDX-FileCopyrightText: 2022 Contributors to the Power Grid Model project <dynamic.grid.calculation@alliander.com>
+SPDX-FileCopyrightText: 2022 Contributors to the License scan action project <OSPO@alliander.com>
 
-SPDX-License-Identifier: MPL-2.0
+SPDX-License-Identifier: Apache-2.0
 -->
 
 # How to Contribute
@@ -15,13 +15,9 @@ There are just a few small guidelines you need to follow before making a change.
 Contribution does not necessarily mean committing code to the repository. 
 We recognize different levels of contributions as shown below in increasing order of dedication:
 
-1. Test and use the libray. Give feedback on the user experience or suggest new features.
-2. Validate the model against other existing libraries. Provide validation test cases.
-3. Report bugs.
-4. Improve the Python interface or helper functions.
-5. Contributing to the C++ core
-    1. Develop new mathematical algorithms
-    1. Improve or add new features into the C++ codebase
+1. Test and use the license scan action. Give feedback on the user experience or suggest new features.
+2. Report bugs.
+
 
 ## Filing bugs and change requests
 
@@ -31,32 +27,6 @@ information on using GitHub issues.
 ## Community Guidelines
 
 This project follows the following [Code of Conduct](CODE_OF_CONDUCT.md).
-
-## Style Guide
-
-For both C++ and Python code we use the pipeline to automatically check the formatting.
-We use `black` to check Python code and `clang-format` to check C++ code.
-If the code format is not complying, the pipeline will fail the pull request will be blocked.
-
-### Python
-
-This project uses the PEP 8 Style Guide for Python Code. For all details about the various conventions please refer to:
-
-[PEP 8](https://www.python.org/dev/peps/pep-0008)
-
-Tip: Use [black](https://github.com/psf/black) to automatically format your Python code to conform to the PEP 8 style guide.
-
-Furthermore, the following conventions apply:
-
-* Maximum line length: 120 characters
-* Double quotes for strings, keys etc.
-    * Except when double quotes in the middle of a string are required.
-
-### C++
-
-This project uses Google Format Style (NOTE: not Google C++ Programming Style) to format the C++ code.
-
-Tip: Use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to format your C++ code.
 
 ## REUSE Compliance
 
