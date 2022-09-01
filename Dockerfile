@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM philipssoftware/ort:latest
+FROM ghcr.io/alliander-opensource/ort-container:latest
 
 COPY entrypoint.sh /entrypoint.sh
 
