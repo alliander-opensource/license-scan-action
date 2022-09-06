@@ -62,8 +62,7 @@ mkdir -p "ort/results"
     --info \
     analyze \
     -i "." \
-    -o "ort" \
-    || exit 1
+    -o "ort"
 LAST_OUTPUT_FILE="ort/analyzer-result.yml"
 
 cp "ort/analyzer-result.yml" "ort/results/"
@@ -76,8 +75,7 @@ if "${RUN_DOWNLOAD}"; then
         --info \
         download \
         -i "ort/analyzer-result.yml" \
-        -o "ort/download" \
-        || exit 1
+        -o "ort/download"
 fi
 
 # Scan
@@ -87,8 +85,7 @@ if "${RUN_SCAN}"; then
         --info \
         scan \
         -i "ort/analyzer-result.yml" \
-        -o "ort/" \
-        || exit 1
+        -o "ort/"
     LAST_OUTPUT_FILE="ort/scan-result.yml"
 fi
 
@@ -100,8 +97,9 @@ if "${RUN_EVALUATE}"; then
         evaluate \
         -i "${LAST_OUTPUT_FILE}" \
         -o "ort" \
-        --package-curations-file "curations.yml" \
-        || exit 1
+        --package-curations-file "curations.yml"
+    # TODO: perhaps capture exit status and re-raise at the end
+
     LAST_OUTPUT_FILE="ort/evaluation-result.yml"
 
     cp "ort/evaluation-result.yml" "ort/results/"
@@ -115,8 +113,7 @@ if "${RUN_REPORT}"; then
         report \
         -f "${REPORT_FORMATS}" \
         -i "${LAST_OUTPUT_FILE}" \
-        -o ort/reports \
-        || exit 1
+        -o ort/reports
 
     cp -r "ort/reports" "ort/results/"
 fi
