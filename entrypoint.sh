@@ -49,6 +49,12 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+exit_if_nonexisting () {
+    if [[ ! -f ${1} ]] ; then
+        exit 1
+    fi
+}
+
 # Prepare directory structure
 
 mkdir -p "ort/reports"
@@ -64,6 +70,7 @@ mkdir -p "ort/results"
     -i "." \
     -o "ort"
 LAST_OUTPUT_FILE="ort/analyzer-result.yml"
+exit_if_nonexisting ${LAST_OUTPUT_FILE}
 
 cp "ort/analyzer-result.yml" "ort/results/"
 
@@ -87,6 +94,7 @@ if "${RUN_SCAN}"; then
         -i "ort/analyzer-result.yml" \
         -o "ort/"
     LAST_OUTPUT_FILE="ort/scan-result.yml"
+    exit_if_nonexisting ${LAST_OUTPUT_FILE}
 fi
 
 # Evaluate
@@ -98,9 +106,8 @@ if "${RUN_EVALUATE}"; then
         -i "${LAST_OUTPUT_FILE}" \
         -o "ort" \
         --package-curations-file "curations.yml"
-    # TODO: perhaps capture exit status and re-raise at the end
-
     LAST_OUTPUT_FILE="ort/evaluation-result.yml"
+    exit_if_nonexisting ${LAST_OUTPUT_FILE}
 
     cp "ort/evaluation-result.yml" "ort/results/"
 fi
@@ -113,7 +120,8 @@ if "${RUN_REPORT}"; then
         report \
         -f "${REPORT_FORMATS}" \
         -i "${LAST_OUTPUT_FILE}" \
-        -o ort/reports
+        -o ort/reports \
+        || exit 1
 
     cp -r "ort/reports" "ort/results/"
 fi
