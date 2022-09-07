@@ -47,6 +47,7 @@ jobs:
         ORT_CONFIG_DIR: '/github/workspace/ort-config/'
 
     - name: Store results
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: license-scan-results
