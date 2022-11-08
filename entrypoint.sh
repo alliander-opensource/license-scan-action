@@ -100,12 +100,16 @@ fi
 # Evaluate
 
 if "${RUN_EVALUATE}"; then
+    PKG_CURATIONS_ARG=""
+    if [[ -f curations.yml ]] ; then
+        PKG_CURATIONS_ARG="--package-curations-file curations.yml"
+    fi
     /opt/ort/bin/ort \
         --info \
         evaluate \
         -i "${LAST_OUTPUT_FILE}" \
         -o "ort" \
-        --package-curations-file "curations.yml"
+        $PKG_CURATIONS_ARG
     LAST_OUTPUT_FILE="ort/evaluation-result.yml"
     exit_if_nonexisting ${LAST_OUTPUT_FILE}
 
