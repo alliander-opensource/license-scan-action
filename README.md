@@ -6,6 +6,13 @@ SPDX-License-Identifier: Apache-2.0
 
 # OSPO License scan action
 
+### This project is deprecated
+
+**Please use the upstream [ORT CI GitHub Action](https://github.com/oss-review-toolkit/ort-ci-github-action)**
+
+<hr>
+</br>
+
 A GitHub Action created by the Alliander Open Source Program Office (OSPO) to scan for licenses in your code.
 
 At the moment this Action is intended to cover the use-cases at Alliander, so it might not fit your use-cases.
